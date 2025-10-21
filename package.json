@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "lucide-react": "^0.546.0",
+    "mongoose": "^8.19.2",
     "multer": "^2.0.2",
     "next": "15.5.4",
     "react": "19.1.0",
