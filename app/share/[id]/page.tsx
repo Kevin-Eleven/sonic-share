@@ -1,6 +1,8 @@
 "use client";
+import Image from "next/image";
 import React from "react";
 import { useEffect, useState } from "react";
+import { io } from "socket.io-client";
 
 export default function SharePage({ params }: { params: { id: string } }) {
   const [uploads, setUploads] = useState<any[]>([]);
@@ -8,6 +10,12 @@ export default function SharePage({ params }: { params: { id: string } }) {
 
   const { id } = React.use(params);
   useEffect(() => {
+    const socket = io();
+    socket.emit("join-room", id);
+    socket.on("file-updated", (data: any) => {
+      console.log("New upload received via socket:", data);
+      setUploads((prev) => [...prev, data]);
+    });
     async function fetchUploads() {
       try {
         const res = await fetch(`/api/share/${id}`);
@@ -23,6 +31,9 @@ export default function SharePage({ params }: { params: { id: string } }) {
     }
 
     fetchUploads();
+    return () => {
+      socket.disconnect();
+    };
   }, [id]);
 
   if (loading) return <p className="text-center mt-10">Loading...</p>;
@@ -44,7 +55,13 @@ export default function SharePage({ params }: { params: { id: string } }) {
                 className="w-full h-80 bg-white text-black rounded-lg"
               ></iframe>
             ) : /\.(jpe?g|png)$/i.test(upload.fileName) ? (
-              <img src={fileUrl} alt="Shared file" className="w-full rounded" />
+              <Image
+                src={fileUrl}
+                alt="Shared file"
+                className="w-full rounded"
+                width={1000}
+                height={600}
+              />
             ) : upload.fileName.endsWith(".mp4") ? (
               <video controls src={fileUrl} className="w-full rounded" />
             ) : (

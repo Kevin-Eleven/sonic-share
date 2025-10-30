@@ -40,3 +40,7 @@ uploads/
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+
+# GEMINI.md

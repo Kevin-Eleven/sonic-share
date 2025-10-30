@@ -2,13 +2,15 @@
   "name": "sonic-share",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "node server.ts",
     "build": "next build --turbopack",
-    "start": "next start",
+    "start": "NODE_ENV=production node server.ts",
     "lint": "eslint"
   },
   "dependencies": {
+    "express": "^5.1.0",
     "lucide-react": "^0.546.0",
     "mongoose": "^8.19.2",
     "multer": "^2.0.2",
@@ -16,15 +18,19 @@
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-hot-toast": "^2.6.0",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1",
     "uuid": "^13.0.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@types/express": "^5.0.3",
     "@types/multer": "^2.0.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/socket.io": "^3.0.1",
     "eslint": "^9",
     "eslint-config-next": "15.5.4",
     "tailwindcss": "^4",
