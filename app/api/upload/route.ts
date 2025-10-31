@@ -11,9 +11,8 @@ const uploadDir = path.join(process.cwd(), "uploads");
 export async function POST(req: NextRequest) {
   try {
     const formData = await req.formData();
-
-    // Optional existing shareId (from frontend)
-    const existingShareId = formData.get("shareId") as string | null;
+    const searchParams = req.nextUrl.searchParams;
+    const roomId = formData.get("roomId") as string | null;
 
     // File or text
     const file = formData.get("file") as File | null;
@@ -27,7 +26,8 @@ export async function POST(req: NextRequest) {
     }
 
     // ✅ Use existing shareId if provided, otherwise generate new
-    const shareId = existingShareId || crypto.randomBytes(4).toString("hex");
+    const shareId =
+      roomId;
     const fileId = uuidv4();
     let fileName = fileId;
 

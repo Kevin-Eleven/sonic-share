@@ -2,7 +2,7 @@
 import { createServer } from "http";
 import next from "next";
 import { Server as SocketIOServer, Socket } from "socket.io";
-import { createRoom, getRoom, addClient, removeClient } from "@/lib/rooms";
+import { createRoom, getRoom, addClient, removeClient } from "./lib/rooms.ts";
 
 const dev = process.env.NODE_ENV !== "production";
 const hostname = "localhost";

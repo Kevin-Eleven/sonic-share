@@ -15,13 +15,12 @@ export default function UploadForm() {
   const [roomId, setRoomId] = useState<string | null>(null);
   const [shareLink, setShareLink] = useState<string>("");
 
-  // 🔹 Setup socket connection and create a room
   useEffect(() => {
     socket = io("http://localhost:3000");
 
     socket.on("connect", () => {
       console.log("✅ Connected to socket server");
-      socket.emit("create-room");
+      socket!.emit("create-room");
     });
 
     socket.on("room-created", (id: string) => {
@@ -81,7 +80,6 @@ export default function UploadForm() {
       // ✅ Notify connected peers in this room
       socket?.emit("upload", { roomId, data: data.uploadedItem });
       console.log("📤 Emitted 'upload' with:", data.uploadedItem);
-
       toast.success("Upload successful!");
       setFile(null);
       setText("");
