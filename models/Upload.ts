@@ -6,6 +6,7 @@ const UploadSchema = new Schema({
   fileName: String,
   originalName: String,
   type: { type: String, enum: ["file", "text"], required: true },
+  fileUrl: { type: String },
   createdAt: { type: Date, default: Date.now },
 });
 

@@ -12,9 +12,9 @@ export default function SharePage({ params }: { params: { id: string } }) {
   useEffect(() => {
     const socket = io();
     socket.emit("join-room", id);
-    socket.on("file-updated", (data: any) => {
+    socket.on("new-upload", (data: any) => {
       console.log("New upload received via socket:", data);
-      setUploads((prev) => [...prev, data]);
+      setUploads((prev) => [data, ...prev]);
     });
     async function fetchUploads() {
       try {
