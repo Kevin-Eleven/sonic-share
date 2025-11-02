@@ -9,7 +9,7 @@ export async function GET(
   { params }: { params: { fileName: string } }
 ) {
   try {
-    const { fileName } = params;
+    const { fileName } = await params;
     const containerClient = blobServiceClient.getContainerClient(containerName);
     const blockBlobClient = containerClient.getBlockBlobClient(fileName);
 
