@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 export default function Home() {
   return (
-    <div className="text-center">
+    <div className="min-h-screen flex flex-col items-center justify-center">
       <p className="text-lg mb-8">Share files and text in real-time with anyone in the world.</p>
       <motion.div
         initial={{ opacity: 0, y: 20 }}

@@ -14,6 +14,9 @@ export async function POST(req: NextRequest) {
     const text = formData.get("text") as string | null;
     const roomId = formData.get("roomId") as string | null;
 
+    const ms = 30 * 60 * 1000; 
+    const expiresAt = new Date(Date.now() + ms);
+  
     if (!file && !text) {
       return NextResponse.json({ error: "No content provided" }, { status: 400 });
     }
@@ -47,7 +50,8 @@ export async function POST(req: NextRequest) {
       fileUrl,
       type: file ? "file" : "text",
       originalName: file ? file.name : null,
-    });
+      expiresAt,
+    }); 
 
     const shareUrl = `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/share/${shareId}`;
 
