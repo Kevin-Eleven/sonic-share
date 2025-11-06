@@ -6,7 +6,7 @@ const containerName = "uploads";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { fileName: string } }
+  { params }: { params: Promise<{ fileName: string }> }
 ) {
   try {
     const { fileName } = await params;
@@ -28,7 +28,7 @@ export async function GET(
     else if (ext === ".png") headers.set("Content-Type", "image/png");
     else if (ext === ".mp4") headers.set("Content-Type", "video/mp4");
 
-    return new NextResponse(downloadBuffer, { headers });
+    return new NextResponse(new Uint8Array(downloadBuffer), { headers });
   } catch (err: any) {
     console.error("File download error:", err);
     return NextResponse.json(

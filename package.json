@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon --watch server.ts --exec ts-node server.ts",
-    "build": "next build --turbopack",
-    "start": "NODE_ENV=production node server.ts",
+    "build": "tsc --project tsconfig.server.json && next build",
+    "start": "NODE_ENV=production node dist/server.js",
     "lint": "eslint"
   },
   "dependencies": {

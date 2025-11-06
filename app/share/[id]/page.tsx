@@ -6,7 +6,7 @@ import { Copy, Download, Loader2, FileText, File } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function SharePage({ params }: { params: { id: string } }) {
+export default function SharePage({ params }: { params: Promise<{ id: string }> }) {
   const [uploads, setUploads] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
